@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar-Themed Slot Machine</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #3e1d1d, #602020);
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 36px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .slot-machine-container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: #2a1a1a;
+      border-radius: 15px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
+      padding: 30px;
+    }
+
+    /* Slots */
+    .slots {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .slot {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #444, #666);
+      border: 5px solid #888;
+      border-radius: 15px;
+      box-shadow: inset 0px -3px 5px rgba(0, 0, 0, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .slot:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Buttons */
+    .controls button {
+      background: #b5651d;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .controls button:hover {
+      background: #8c4511;
+      transform: scale(1.05);
+    }
+
+    /* Message */
+    .message {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <h1>Bar-Themed Slot Machine</h1>
+  <div class="slot-machine-container">
+    <div class="slots">
+      <div class="slot" id="slot1">🍺</div>
+      <div class="slot" id="slot2">🍷</div>
+      <div class="slot" id="slot3">🍸</div>
+    </div>
+    <div class="controls">
+      <button onclick="spinSlots()">Spin</button>
+    </div>
+    <div class="message" id="message">Press Spin to Play!</div>
+  </div>
+
+  <script>
+    const symbols = ["🍺", "🍷", "🍸", "🍹", "🥃", "🍾", "🍻", "BAR"];
+
+    function spinSlots() {
+      const slot1 = document.getElementById("slot1");
+      const slot2 = document.getElementById("slot2");
+      const slot3 = document.getElementById("slot3");
+      const message = document.getElementById("message");
+
+      // Generate random symbols for each slot
+      const result1 = symbols[Math.floor(Math.random() * symbols.length)];
+      const result2 = symbols[Math.floor(Math.random() * symbols.length)];
+      const result3 = symbols[Math.floor(Math.random() * symbols.length)];
+
+      slot1.textContent = result1;
+      slot2.textContent = result2;
+      slot3.textContent = result3;
+
+      // Determine if the player wins
+      if (result1 === result2 && result2 === result3) {
+        message.textContent = "🎉 Jackpot! You Win! 🎉";
+      } else if (result1 === result2 || result2 === result3 || result1 === result3) {
+        message.textContent = "🍹 Close! You get a small prize! 🍹";
+      } else {
+        message.textContent = "💔 Try Again! 💔";
+      }
+    }
+  </script>
+</body>
+</html>
